@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text_additem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addItem.addItemFragment">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="162dp"
+        android:text="@string/AddItem_addItemButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3" />
+
+    <EditText
+        android:id="@+id/additem_gameName"
+        android:layout_width="335dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="106dp"
+        android:autofillHints="Game Name"
+        android:ems="10"
+        android:hint="@string/additem_ItemName_hint"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="332dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="2"
+        android:ems="10"
+        android:hint="@string/additem_nbMinPlayers_hint"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/additem_gameName" />
+
+    <EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="329dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="14dp"
+        android:autofillHints="4"
+        android:ems="10"
+        android:hint="@string/additem_nbMaxPlayers_hint"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumber3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <EditText
+        android:id="@+id/editTextNumber3"
+        android:layout_width="332dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="159dp"
+        android:autofillHints="30"
+        android:ems="10"
+        android:hint="@string/additem_gameDuration_hint"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="329dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="19dp"
+        android:autofillHints="@string/additem_gameType_hint"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/additem_gameType_hint"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

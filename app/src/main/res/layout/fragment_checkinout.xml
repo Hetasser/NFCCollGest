@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/checkinout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.checkinout.CheckinoutFragment">
+
+<TextView
+    android:id="@+id/text_checkinout"
+    android:layout_width="351dp"
+    android:layout_height="143dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="center"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.528"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.296" />
+
+<CheckBox
+    android:id="@+id/auto_checkinout_checkbox"
+    android:layout_width="350dp"
+    android:layout_height="48dp"
+    android:layout_marginStart="27dp"
+    android:layout_marginTop="42dp"
+    android:layout_marginEnd="28dp"
+    android:layout_marginBottom="10dp"
+    android:text="@string/checkinout_button_autocheckinout"
+    app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_chainStyle="spread"
+    android:onClick="onAutomaticUpdateClicked" />
+
+<RadioGroup
+    android:id="@+id/radioGroup"
+    android:layout_width="350dp"
+    android:layout_height="46dp"
+    android:layout_marginStart="30dp"
+    android:orientation="horizontal"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/auto_checkinout_checkbox">
+
+    <RadioButton
+        android:id="@+id/checkinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onCheckInButtonClicked"
+        android:text="@string/checkinout_checkinButton" />
+
+    <RadioButton
+        android:id="@+id/checkoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onCheckOutButtonClicked"
+        android:text="@string/checkinout_checkoutButton" />
+
+    <RadioButton
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onPlayButtonClicked"
+        android:text="@string/checkinout_playButton" />
+
+</RadioGroup>
+
+<Button
+    android:id="@+id/checkinoutButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="158dp"
+    android:layout_marginTop="46dp"
+    android:layout_marginEnd="159dp"
+    android:layout_marginBottom="210dp"
+    android:text="@string/checkinout_validateButton"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/text_checkinout" />
+
+<EditText
+    android:id="@+id/editTextTextPersonName"
+    android:layout_width="131dp"
+    android:layout_height="43dp"
+    android:ems="10"
+    android:hint="@string/checkinout_checkoutTo_hint"
+    android:inputType="textPersonName"
+    tools:layout_editor_absoluteX="152dp"
+    tools:layout_editor_absoluteY="136dp"  />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

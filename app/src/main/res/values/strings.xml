@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">NFCCollGest</string>
+
+    <string name="title_listing">List</string>
+    <string name="title_additem">Add Item</string>
+    <string name="title_checkinout">Check In/Out</string>
+    <string name="title_play">Play</string>
+
+    <string name="AddItem_addItemButton">Add Item</string>
+    <string name="additem_ItemName">Add Item</string>
+    <string name="additem_ItemName_hint">the name of the game</string>
+    <string name="additem_nbMinPlayers_hint">minimum number of players</string>
+    <string name="additem_nbMaxPlayers_hint">maximum number of players</string>
+    <string name="additem_gameDuration_hint">game duration</string>
+    <string name="additem_gameType_hint">types of game</string>
+    <string name="additem_nbMinPlayers">nb Min Players</string>
+    <string name="additem_nbMaxPlayers">nb Max Players</string>
+    <string name="additem_gameDuration">Game Duration</string>
+    <string name="additem_gameType">Game Types</string>
+
+    <string name="checkinout_playButton">Play</string>
+    <string name="checkinout_checkinButton">Check In</string>
+    <string name="checkinout_checkoutButton">Check Out</string>
+    <string name="checkinout_checkoutTo_hint">CheckedOut to</string>
+    <string name="checkinout_validateButton">Validate</string>
+    <string name="checkinout_button_autocheckinout">Automatic validation ?</string>
+</resources>
