@@ -9,14 +9,12 @@ import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -26,7 +24,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.collgest.db.CollGestDBHelper;
 import com.example.collgest.db.CollGestItem;
 import com.example.collgest.ui.checkinout.CheckinoutFragment;
-import com.example.collgest.ui.checkinout.CheckinoutViewModel;
 import com.example.collgest.ui.listing.ListingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -62,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
     }
 
     /***********************************************************************************************
