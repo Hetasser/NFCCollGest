@@ -26,6 +26,7 @@ I have NFC tags and a NFC writer, and my phone has a NFC reader so the solution 
   todo : 
    - create the first screen (listing all games with if possible filters and sorting)
    - when everything is in working order, maybe add a screen to write infos to the NFC Tag directly from the phone
+   - allow import/export of the listing
    
    Help is, of course, always welcome
    As I'm not a professional developper, this is more of a hobby, there are probably a LOT of horrible things in my code, I'm always open to improvements.
