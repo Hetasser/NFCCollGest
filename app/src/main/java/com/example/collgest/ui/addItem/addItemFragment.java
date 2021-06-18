@@ -23,13 +23,7 @@ public class addItemFragment extends Fragment {
         addItemViewModel =
                 new ViewModelProvider(this).get(com.example.collgest.ui.addItem.addItemViewModel.class);
         View root = inflater.inflate(R.layout.fragment_additem, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_additem);
-        addItemViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
         return root;
     }
 }

@@ -17,7 +17,8 @@
         android:text="@string/AddItem_addItemButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3"
+        android:onClick="onAddItemButtonClicked" />/>
 
     <EditText
         android:id="@+id/additem_gameName"
