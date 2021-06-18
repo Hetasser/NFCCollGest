@@ -89,7 +89,7 @@
     android:onClick="onManuallyValidate" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/checkinout_checkedOutTo"
         android:layout_width="364dp"
         android:layout_height="41dp"
         android:layout_marginStart="152dp"

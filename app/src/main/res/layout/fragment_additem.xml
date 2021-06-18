@@ -17,7 +17,7 @@
         android:text="@string/AddItem_addItemButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3"
+        app:layout_constraintTop_toBottomOf="@+id/additem_gameDuration"
         android:onClick="onAddItemButtonClicked" />/>
 
     <EditText
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/additem_gameNbMinPlayer"
         android:layout_width="332dp"
         android:layout_height="55dp"
         android:layout_marginStart="40dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/additem_gameName" />
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/additem_gameNbMaxPlayer"
         android:layout_width="329dp"
         android:layout_height="62dp"
         android:layout_marginStart="42dp"
@@ -58,14 +58,14 @@
         android:ems="10"
         android:hint="@string/additem_nbMaxPlayers_hint"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumber3"
+        app:layout_constraintBottom_toTopOf="@+id/additem_gameDuration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.013"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/additem_gameNbMinPlayer" />
 
     <EditText
-        android:id="@+id/editTextNumber3"
+        android:id="@+id/additem_gameDuration"
         android:layout_width="332dp"
         android:layout_height="49dp"
         android:layout_marginStart="42dp"
@@ -78,10 +78,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
+        app:layout_constraintTop_toBottomOf="@+id/additem_gameNbMaxPlayer" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/additem_gameTypes"
         android:layout_width="329dp"
         android:layout_height="113dp"
         android:layout_marginStart="45dp"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3"
+        app:layout_constraintTop_toBottomOf="@+id/additem_gameDuration"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

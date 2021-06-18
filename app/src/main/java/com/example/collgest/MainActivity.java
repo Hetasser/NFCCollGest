@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        CheckinoutFragment checkinoutFragment=null;
         setIntent(intent);
         System.out.println("--------------------------------- onNewIntent *************************************");
         StringBuilder itemData = new StringBuilder();
@@ -88,14 +89,11 @@ public class MainActivity extends AppCompatActivity {
             assert navHostFragment != null : "navHostFragment is null";
             for (Fragment fragment : navHostFragment.getChildFragmentManager().getFragments()) {
                 if (fragment.getClass().equals(CheckinoutFragment.class)) {
-                    CheckinoutFragmentId = fragment.getId();
+                    checkinoutFragment = (CheckinoutFragment) fragment;
                 }
             }
-            CheckinoutFragment checkinoutFragment = (CheckinoutFragment) navHostFragment.getChildFragmentManager().findFragmentById(CheckinoutFragmentId);
             assert checkinoutFragment != null : "checkinoutFragment is null";
             checkinoutFragment.updateCheckinoutmText(itemData.toString());
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ \n" + isAutomaticUpdateChecked + " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
             if (isAutomaticUpdateChecked) {
                 if (isCheckinButtonChecked) {
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  automatic Check In  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -107,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  automatic lastPlay  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     updateLastPlayedField(itemGUID);
                 } else {
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Nothing to do  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            }
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  automatic nothing to do  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                }
             }
         }
     }
@@ -138,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCheckOutButtonClicked(View view) {
         ViewGroup grandParentView = (ViewGroup) view.getParent().getParent();
         for(int i=0; i< grandParentView.getChildCount();i++){
-            if(grandParentView.getChildAt(i) instanceof androidx.appcompat.widget.AppCompatEditText){
+            if (grandParentView.getChildAt(i).getId() == R.id.checkinout_checkedOutTo){
                 checkedOutTo = Objects.requireNonNull(((AppCompatEditText) grandParentView.getChildAt(i)).getText()).toString();
             }
         }
@@ -216,24 +214,52 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Manual lastPlay  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 updateLastPlayedField(itemGUID);
             } else {
-               System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Nothing to do  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+               System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Manual Nothing to do  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
            }
     }
 
     public void onAddItemButtonClicked(View view){
-        String gameName;
-        int nbMinPlayers;
-        int nbMaxPLayer;
-        int gameDuration;
-        String gameTypes;
+        String gameName=null;
+        int nbMinPlayers=0;
+        int nbMaxPLayer=0;
+        int gameDuration=0;
+        String gameTypes=null;
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  onAddItemButtonClicked  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         ViewGroup parentView = (ViewGroup) view.getParent();
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  " + parentView.toString() + "  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         for(int i=0; i< parentView.getChildCount();i++){
             if(parentView.getChildAt(i) instanceof androidx.appcompat.widget.AppCompatEditText){
-                System.out.println(Objects.requireNonNull(((AppCompatEditText) parentView.getChildAt(i)).getText()).toString());
+                switch (parentView.getChildAt(i).getId()){
+                    case R.id.additem_gameName : gameName = Objects.requireNonNull(((AppCompatEditText) parentView.getChildAt(i)).getText()).toString();
+                        break;
+                    case R.id.additem_gameNbMinPlayer : nbMinPlayers = Integer.parseInt(Objects.requireNonNull(((AppCompatEditText) parentView.getChildAt(i)).getText()).toString());
+                        break;
+                    case R.id.additem_gameNbMaxPlayer : nbMaxPLayer = Integer.parseInt(Objects.requireNonNull(((AppCompatEditText) parentView.getChildAt(i)).getText()).toString());
+                        break;
+                    case R.id.additem_gameDuration : gameDuration = Integer.parseInt(Objects.requireNonNull(((AppCompatEditText) parentView.getChildAt(i)).getText()).toString());
+                        break;
+                    case R.id.additem_gameTypes : gameTypes = Objects.requireNonNull(((AppCompatEditText) parentView.getChildAt(i)).getText()).toString();
+                        break;
+                }
             }
+        }
+
+        if(gameName != null && nbMinPlayers != 0 && nbMaxPLayer != 0 && gameDuration != 0 && gameTypes != null) {
+            CollGestDBHelper collGestDBHelper = new CollGestDBHelper(this);
+            collGestDBHelper.updateGestItem(new CollGestItem(
+                    itemGUID,
+                    gameName,
+                    nbMinPlayers,
+                    nbMaxPLayer,
+                    gameDuration,
+                    gameTypes,
+                    java.time.LocalDateTime.now().toString(),
+                    "")
+
+            );
+        } else {
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  missing field +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
         }
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  onAddItemButtonClicked  end +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
