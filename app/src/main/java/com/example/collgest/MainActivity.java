@@ -9,6 +9,8 @@ import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import com.example.collgest.db.CollGestDBHelper;
 import com.example.collgest.db.CollGestItem;
 import com.example.collgest.ui.checkinout.CheckinoutFragment;
 import com.example.collgest.ui.checkinout.CheckinoutViewModel;
+import com.example.collgest.ui.listing.ListingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.UnsupportedEncodingException;
@@ -38,7 +41,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAutomaticUpdateChecked = false;
     private String itemGUID="";
     private String checkedOutTo = "";
+    private ListView addItemListView;
 
+    /***********************************************************************************************
+     * Cration de l'activite
+     * *********************************************************************************************
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    /***********************************************************************************************
+     * Gestion de l'evenement quand on détecte un tag NFC
+     * *********************************************************************************************
+     * @param intent
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         CheckinoutFragment checkinoutFragment=null;
@@ -111,6 +125,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private String readText(NdefRecord record) throws UnsupportedEncodingException {
+        /*
+         * See NFC forum specification for "Text Record Type Definition" at 3.2.1
+         *
+         * http://www.nfc-forum.org/specs/
+         *
+         * bit_7 defines encoding
+         * bit_6 reserved for future use, must be 0
+         * bit_5..0 length of IANA language code
+         */
+
+        byte[] payload = record.getPayload();
+
+        // Get the Text Encoding
+        String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+
+        // Get the Language Code
+        int languageCodeLength = payload[0] & 0063;
+
+        // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
+        // e.g. "en"
+
+        // Get the Text
+        return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+    }
+
+    /***********************************************************************************************
+     * Fragment : Checkin / Checkout
+     * *********************************************************************************************
+     * @param view
+     */
     public void onCheckInButtonClicked(View view) {
         System.out.println((view.toString()));
         // Is the button now checked?
@@ -218,6 +263,12 @@ public class MainActivity extends AppCompatActivity {
            }
     }
 
+
+    /***********************************************************************************************
+     * Gestion du fragment "Add Item
+     * *********************************************************************************************
+     * @param view
+     */
     public void onAddItemButtonClicked(View view){
         String gameName=null;
         int nbMinPlayers=0;
@@ -262,33 +313,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  onAddItemButtonClicked  end +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
     }
 
-    private String readText(NdefRecord record) throws UnsupportedEncodingException {
-        /*
-         * See NFC forum specification for "Text Record Type Definition" at 3.2.1
-         *
-         * http://www.nfc-forum.org/specs/
-         *
-         * bit_7 defines encoding
-         * bit_6 reserved for future use, must be 0
-         * bit_5..0 length of IANA language code
-         */
-
-        byte[] payload = record.getPayload();
-
-        // Get the Text Encoding
-        String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
-
-        // Get the Language Code
-        int languageCodeLength = payload[0] & 0063;
-
-        // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
-        // e.g. "en"
-
-        // Get the Text
-        return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
-    }
+    /***********************************************************************************************
+     * Gestion du fragment "Listing"
+     * *********************************************************************************************
+     */
 
 }
