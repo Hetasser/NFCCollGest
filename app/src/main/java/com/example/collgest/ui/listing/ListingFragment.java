@@ -1,5 +1,7 @@
 package com.example.collgest.ui.listing;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,14 @@ import com.example.collgest.db.CollGestItem;
 import com.example.collgest.R;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ListingFragment extends Fragment {
+    private Context activityContext;
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-    private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60;
+    private static final int SPAN_COUNT = 1;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -35,14 +38,14 @@ public class ListingFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected GameListAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset;
+    protected String[][] mDataset;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
+        activityContext = this.getActivity();
         initDataset();
     }
 
@@ -58,9 +61,10 @@ public class ListingFragment extends Fragment {
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        //mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new GridLayoutManager(getActivity(),SPAN_COUNT);
 
-        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
             // Restore saved layout manager type.
@@ -81,7 +85,7 @@ public class ListingFragment extends Fragment {
      * @param layoutManagerType Type of layout manager to switch to.
      */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
-        int scrollPosition = 8;
+        int scrollPosition = 0;
 
         // If a layout manager has already been set, get current scroll position.
         if (mRecyclerView.getLayoutManager() != null) {
@@ -108,14 +112,28 @@ public class ListingFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+
     /**
      * Generates Strings for RecyclerView's adapter. This data would usually come
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset[i] = "This is element #" + i;
+        CollGestDBHelper collGestDBHelper = new CollGestDBHelper(activityContext);
+        List<CollGestItem> listAllItems = collGestDBHelper.getAllGestItem();
+
+        mDataset = new String[listAllItems.size()][7];
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(listAllItems.size());
+        System.out.println(listAllItems.toString());
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        for (int i = 0; i < listAllItems.size(); i++) {
+            mDataset[i][0] = listAllItems.get(i).getItemName();
+            mDataset[i][1] = Integer.toString(listAllItems.get(i).getItemMinJoueurs());
+            mDataset[i][2] = Integer.toString(listAllItems.get(i).getItemMaxJoueurs());
+            mDataset[i][3] = Integer.toString(listAllItems.get(i).getItemDuration());
+            mDataset[i][4] = listAllItems.get(i).getItemTypes();
+            mDataset[i][5] = listAllItems.get(i).getItemCheckedOut();
+            mDataset[i][6] = listAllItems.get(i).getItemLastPlayed();
         }
         System.out.println(mDataset);
     }

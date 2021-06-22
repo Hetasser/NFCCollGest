@@ -12,25 +12,41 @@ import java.util.Arrays;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHolder> {
 
-    private String[] localDataSet;
+    private String[][] localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final TextView gameNameView;
+        private final TextView gameMinPlayersView;
+        private final TextView gameMaxPLayersView;
+        private final TextView gameDurationView;
+        private final TextView gameTypesView;
+        private final TextView gameCheckedOutToView;
+        private final TextView gameLastPlayedView;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-            textView = (TextView) view.findViewById(R.id.listing_gamename);
+            gameNameView = (TextView) view.findViewById(R.id.listing_gamename);
+            gameMinPlayersView = (TextView) view.findViewById(R.id.listing_gameminplayer);
+            gameMaxPLayersView = (TextView) view.findViewById(R.id.listing_gamemaxplayers);
+            gameDurationView = (TextView) view.findViewById(R.id.listing_gameduration);
+            gameTypesView = (TextView) view.findViewById(R.id.listing_gametypes);
+            gameCheckedOutToView = (TextView) view.findViewById(R.id.listing_gamecheckedoutto);
+            gameLastPlayedView = (TextView) view.findViewById(R.id.listing_gamelastplayed);
 
         }
 
-        public TextView getTextView() {
-            return textView;
-        }
+        public TextView getGameNameView() {return gameNameView;}
+        public TextView getGameMinPlayersView() {return gameMinPlayersView;}
+        public TextView getGameMaxPLayersView() {return gameMaxPLayersView;}
+        public TextView getGameDurationView() {return gameDurationView;}
+        public TextView getGameTypesView() {return gameTypesView;}
+        public TextView getGameCheckedOutToView() {return gameCheckedOutToView;}
+        public TextView getGameLastPlayedView() {return gameLastPlayedView;}
     }
 
     /**
@@ -39,7 +55,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public GameListAdapter(String[] dataSet) {
+    public GameListAdapter(String[][] dataSet) {
         localDataSet = dataSet;
     }
 
@@ -59,7 +75,13 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(localDataSet[position]);
+        viewHolder.getGameNameView().setText(localDataSet[position][0]);
+        viewHolder.getGameMinPlayersView().setText(localDataSet[position][1]);
+        viewHolder.getGameMaxPLayersView().setText(localDataSet[position][2]);
+        viewHolder.getGameDurationView().setText(localDataSet[position][3]);
+        viewHolder.getGameTypesView().setText(localDataSet[position][4]);
+        viewHolder.getGameCheckedOutToView().setText(localDataSet[position][5]);
+        viewHolder.getGameLastPlayedView().setText(localDataSet[position][6]);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

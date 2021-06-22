@@ -48,7 +48,7 @@ public class CollGestDBHelper extends SQLiteOpenHelper {
                 + COLUMN_ITEM_LASTPLAYED + " TEXT," + COLUMN_ITEM_CHECKEDOUT + " TEXT" + ")";
         // Execute Script.
         db.execSQL(script);
-        addGestItem(new CollGestItem("E9DCF61F-91C2-46F1-8AE6-B0E70F04552F", "Tribo", 2, 2, 10, "Echecs", "2021-05-31", ""), db);
+        addGestItem(new CollGestItem("E9DCF61F-91C2-46F1-8AE6-B0E70F04552F", "Tribo", 2, 2, 10, "Echecs", "2021-05-31", ""));
     }
 
 
@@ -64,8 +64,8 @@ public class CollGestDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addGestItem(CollGestItem collGestItem, SQLiteDatabase db) {
-
+    public void addGestItem(CollGestItem collGestItem) {
+        SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_ITEM_GUID, collGestItem.getItemGUID());
@@ -113,8 +113,9 @@ public class CollGestDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<CollGestItem> getAllGestItem(SQLiteDatabase db) {
+    public List<CollGestItem> getAllGestItem() {
 
+        SQLiteDatabase db = this.getReadableDatabase();
         List<CollGestItem> gestItemList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_ITEM;
@@ -133,7 +134,7 @@ public class CollGestDBHelper extends SQLiteOpenHelper {
                         Integer.parseInt(cursor.getString(4)),
                         cursor.getString(5),
                         cursor.getString(6),
-                        cursor.getColumnName(7)
+                        cursor.getString(7)
                 );
                 // Adding GestItem to list
                 gestItemList.add(collGestItem);

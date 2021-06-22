@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:gravity="center_vertical"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/listing_gamename"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</FrameLayout>
+        android:layout_width="70dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:id="@+id/listing_gameminplayer"
+        android:layout_width="20dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listing_gamename" />
+
+    <TextView
+        android:id="@+id/listing_gamemaxplayers"
+        android:layout_width="20dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listing_gameminplayer" />
+
+    <TextView
+        android:id="@+id/listing_gameduration"
+        android:layout_width="20dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listing_gamemaxplayers" />
+
+    <TextView
+        android:id="@+id/listing_gametypes"
+        android:layout_width="100dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listing_gameduration" />
+
+    <TextView
+        android:id="@+id/listing_gamecheckedoutto"
+        android:layout_width="57dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listing_gametypes" />
+
+    <TextView
+        android:id="@+id/listing_gamelastplayed"
+        android:layout_width="65dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listing_gamecheckedoutto" />
+</RelativeLayout>

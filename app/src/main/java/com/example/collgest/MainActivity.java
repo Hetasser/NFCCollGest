@@ -28,6 +28,11 @@ import com.example.collgest.ui.listing.ListingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -232,6 +237,9 @@ public class MainActivity extends AppCompatActivity {
     private void updateLastPlayedField(String itemGUID) {
         CollGestDBHelper collGestDBHelper = new CollGestDBHelper(this);
         CollGestItem collGestItem = collGestDBHelper.getCollGestItemFromDB(itemGUID);
+        System.out.println("---------------------------------      ---------------------------------------------------");
+        System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        System.out.println("---------------------------------      ---------------------------------------------------");
         collGestDBHelper.updateGestItem(new CollGestItem(
                         collGestItem.getItemGUID(),
                         collGestItem.getItemName(),
@@ -239,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                         collGestItem.getItemMaxJoueurs(),
                         collGestItem.getItemDuration(),
                         collGestItem.getItemTypes(),
-                        java.time.LocalDateTime.now().toString(),
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()),
                         collGestItem.getItemCheckedOut()
                 )
         );
@@ -295,14 +303,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(gameName != null && nbMinPlayers != 0 && nbMaxPLayer != 0 && gameDuration != 0 && gameTypes != null) {
             CollGestDBHelper collGestDBHelper = new CollGestDBHelper(this);
-            collGestDBHelper.updateGestItem(new CollGestItem(
+            collGestDBHelper.addGestItem(new CollGestItem(
                     itemGUID,
                     gameName,
                     nbMinPlayers,
                     nbMaxPLayer,
                     gameDuration,
                     gameTypes,
-                    java.time.LocalDateTime.now().toString(),
+                    new SimpleDateFormat("dd/MM/yyyy").format(new Date()),
                     "")
 
             );
